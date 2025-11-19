@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio-Hub.Droid", "Audio-Hub\Audio-Hub.Droid\Audio-Hub.Droid.csproj", "{965D4027-E396-49B8-969C-C59E6AB2E3CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio-Hub.Droid", "Audio-Hub\Audio-Hub.Droid\Audio-Hub.Droid.csproj", "{965D4027-E396-49B8-969C-C59E6AB2E3CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio-Hub.iOS", "Audio-Hub\Audio-Hub.iOS\Audio-Hub.iOS.csproj", "{B39B22B3-11E7-4E8F-8C09-60FF9967F403}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio-Hub.iOS", "Audio-Hub\Audio-Hub.iOS\Audio-Hub.iOS.csproj", "{B39B22B3-11E7-4E8F-8C09-60FF9967F403}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio-Hub.Mac", "Audio-Hub\Audio-Hub.Mac\Audio-Hub.Mac.csproj", "{6BD31088-835D-4221-9780-D8627ED4FC9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio-Hub.Mac", "Audio-Hub\Audio-Hub.Mac\Audio-Hub.Mac.csproj", "{6BD31088-835D-4221-9780-D8627ED4FC9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio-Hub.WinUI", "Audio-Hub\Audio-Hub.WinUI\Audio-Hub.WinUI.csproj", "{9D0E579F-08A2-4BAC-A461-EE064856FB80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio-Hub.WinUI", "Audio-Hub\Audio-Hub.WinUI\Audio-Hub.WinUI.csproj", "{9D0E579F-08A2-4BAC-A461-EE064856FB80}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio-Hub", "Audio-Hub\Audio-Hub\Audio-Hub.csproj", "{629EC4F8-E510-4420-BF0F-C71ECEEEB914}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +121,22 @@ Global
 		{9D0E579F-08A2-4BAC-A461-EE064856FB80}.Release|x86.ActiveCfg = Release|x86
 		{9D0E579F-08A2-4BAC-A461-EE064856FB80}.Release|x86.Build.0 = Release|x86
 		{9D0E579F-08A2-4BAC-A461-EE064856FB80}.Release|x86.Deploy.0 = Release|x86
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Debug|x64.Build.0 = Debug|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Debug|x86.Build.0 = Debug|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Release|ARM64.Build.0 = Release|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Release|x64.ActiveCfg = Release|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Release|x64.Build.0 = Release|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Release|x86.ActiveCfg = Release|Any CPU
+		{629EC4F8-E510-4420-BF0F-C71ECEEEB914}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
