@@ -1,0 +1,11 @@
+{
+  "solution": {
+    "path": "Audio-Hub.sln",
+    "projects": [
+      "Audio-Hub\\Audio-Hub\\Audio-Hub.csproj",
+      "Audio-Hub\\Audio-Hub.Droid\\Audio-Hub.Droid.csproj",
+      "Audio-Hub\\Audio-Hub.iOS\\Audio-Hub.iOS.csproj",
+      "Audio-Hub\\Audio-Hub.Mac\\Audio-Hub.Mac.csproj"
+    ]
+  }
+}
