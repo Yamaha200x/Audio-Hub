@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0-ios</TargetFramework>
 		<SupportedOSPlatformVersion>11.0</SupportedOSPlatformVersion>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>Audio_Hub</RootNamespace>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<TargetFramework>net9.0-ios</TargetFramework>
 		<UseMaui>true</UseMaui>
 		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
 	</PropertyGroup>
