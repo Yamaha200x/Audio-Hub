@@ -5,11 +5,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Audio_Hub"
     Shell.FlyoutBehavior="Disabled"
-    Title="Audio_Hub">
+    Shell.NavBarIsVisible="False">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar 
+            Shell.TabBarUnselectedColor="#94A3B8"
+            Shell.TabBarTitleColor="#00C2CB"
+            Shell.TabBarForegroundColor="#00C2CB"
+            Shell.TabBarBackgroundColor="#1E5D60" >
 
+        <Tab Title="Start" Icon="start_icon.png">
+            <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
+        </Tab>
+
+        <Tab Title="Entdecken" Icon="search_icon.png">
+            <ShellContent ContentTemplate="{DataTemplate local:DiscoverPage}" />
+        </Tab>
+
+        <Tab Title="Bibliothek" Icon="library_icon.png">
+            <ShellContent ContentTemplate="{DataTemplate local:LibraryPage}" />
+        </Tab>
+
+    </TabBar>
 </Shell>

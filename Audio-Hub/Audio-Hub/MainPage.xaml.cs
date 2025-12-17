@@ -2,23 +2,24 @@
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+    public MainPage()
+    {
+        InitializeComponent();
 
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+        // Startet die Initialisierung, sobald die Seite geladen ist
+        StartAppSequence();
+    }
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
+    private async void StartAppSequence()
+    {
+        // Einmaliges Laden am Anfang (z.B. 2 Sekunden)
+        await Task.Delay(2000);
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+        // Jetzt wechseln wir DAUERHAFT zur AppShell
+        // Dadurch wird die TabBar unten sichtbar und der Ladebildschirm gelöscht
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            Application.Current.MainPage = new AppShell();
+        });
+    }
 }
-

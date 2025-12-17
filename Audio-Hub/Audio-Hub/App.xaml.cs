@@ -2,10 +2,11 @@
 
 public partial class App : Application
 {
-	public App()
-	{
-		InitializeComponent();
+    public App()
+    {
+        InitializeComponent();
 
-		MainPage = new AppShell();
-	}
+        // Hier starten wir mit dem Ladebildschirm
+        MainPage = new MainPage();
+    }
 }
