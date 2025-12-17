@@ -1,4 +1,7 @@
-﻿namespace Audio_Hub.Droid
+﻿using Audio_Hub.Droid.Services;
+using Audio_Hub.Droid.Platforms.Android;
+
+namespace Audio_Hub.Droid
 {
     public static class MauiProgram
     {
@@ -6,8 +9,11 @@
         {
             var builder = MauiApp.CreateBuilder();
 
-            builder
-                .UseSharedMauiApp();
+            builder.UseSharedMauiApp();
+            
+            builder.Services.AddSingleton<IAudioPlayerService, AudioPlayerService>();
+                        builder.Services.AddSingleton<MainPage>();
+
 
             return builder.Build();
         }
