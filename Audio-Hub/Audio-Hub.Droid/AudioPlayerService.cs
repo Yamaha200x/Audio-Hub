@@ -1,13 +1,19 @@
-using Android.Content;
-using Audio_Hub.Droid.Services;  // Changed from Audio_Hub to Audio_Hub
+using global::Android.Content;
+using global::Android.OS;
+using Audio_Hub.Droid.Services;
 using Microsoft.Maui.ApplicationModel;
-using Android.OS;
 
-namespace Audio_Hub.Droid.Platforms.Android;  // Use Audio_Hub (with underscore)
+namespace Audio_Hub.Droid.Platforms.Android;
 
+/// <summary>
+/// Android audio player implementation using foreground service.
+/// Communicates with MusicPlaybackService via Intents.
+/// </summary>
 public class AudioPlayerService : IAudioPlayerService
 {
     public event EventHandler<string>? PlaybackStateChanged;
+    public event EventHandler<int>? PositionChanged;
+    public event EventHandler<AudioMetadata>? CurrentTrackChanged;
 
     public Task PlayAsync(string filePath)
     {
@@ -18,15 +24,10 @@ public class AudioPlayerService : IAudioPlayerService
         intent.SetAction("PLAY");
         intent.PutExtra("audioPath", filePath);
         
-        // Check Android version for StartForegroundService
         if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
-        {
             context.StartForegroundService(intent);
-        }
         else
-        {
             context.StartService(intent);
-        }
         
         PlaybackStateChanged?.Invoke(this, "Playing");
         return Task.CompletedTask;
@@ -58,9 +59,52 @@ public class AudioPlayerService : IAudioPlayerService
         return Task.CompletedTask;
     }
 
+    public Task ResumeAsync()
+    {
+        return PlayAsync(string.Empty); // Service will resume current track
+    }
+
+    public Task SeekToAsync(int positionMs)
+    {
+        var context = Platform.CurrentActivity;
+        if (context == null) return Task.CompletedTask;
+        
+        var intent = new Intent(context, typeof(MusicPlaybackService));
+        intent.SetAction("SEEK");
+        intent.PutExtra("position", positionMs);
+        context.StartService(intent);
+        
+        return Task.CompletedTask;
+    }
+
     public Task<bool> IsPlayingAsync()
     {
-        // TODO: Implement state tracking
+        // TODO: Implement state tracking via broadcast receiver
         return Task.FromResult(false);
+    }
+
+    public Task<int> GetCurrentPositionAsync()
+    {
+        // TODO: Implement via broadcast receiver from service
+        return Task.FromResult(0);
+    }
+
+    public Task<int> GetDurationAsync()
+    {
+        // TODO: Implement via broadcast receiver from service
+        return Task.FromResult(0);
+    }
+
+    public Task SetVolumeAsync(float volume)
+    {
+        var context = Platform.CurrentActivity;
+        if (context == null) return Task.CompletedTask;
+        
+        var intent = new Intent(context, typeof(MusicPlaybackService));
+        intent.SetAction("SET_VOLUME");
+        intent.PutExtra("volume", volume);
+        context.StartService(intent);
+        
+        return Task.CompletedTask;
     }
 }
