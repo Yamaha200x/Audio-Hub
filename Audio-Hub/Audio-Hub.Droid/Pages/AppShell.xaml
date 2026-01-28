@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="Audio_Hub.AppShell"
+    x:Class="Audio_Hub.Droid.Pages.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Audio_Hub"
+    xmlns:pages="clr-namespace:Audio_Hub.Droid.Pages"
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False"
     Shell.TabBarBackgroundColor="#000000"
@@ -20,19 +20,19 @@
         <ShellContent
             Title="Start"
             Icon="home_icon.png"
-            ContentTemplate="{DataTemplate local:HomePage}"
+            ContentTemplate="{DataTemplate pages:HomePage}"
             Route="HomePage" />
 
         <ShellContent
             Title="Suche"
             Icon="search_icon.png"
-            ContentTemplate="{DataTemplate local:SearchPage}"
+            ContentTemplate="{DataTemplate pages:SearchPage}"
             Route="SearchPage" />
 
         <ShellContent
             Title="Bibliothek"
             Icon="library_icon.png"
-            ContentTemplate="{DataTemplate local:LibraryPage}"
+            ContentTemplate="{DataTemplate pages:LibraryPage}"
             Route="LibraryPage" />
 
     </TabBar>

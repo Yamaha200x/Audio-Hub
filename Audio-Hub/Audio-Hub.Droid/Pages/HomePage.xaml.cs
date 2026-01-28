@@ -1,6 +1,6 @@
-using Audio_Hub.Droid.Services;
+using Audio_Hub.Droid.Services; 
 
-namespace Audio_Hub;
+namespace Audio_Hub.Droid.Pages;
 
 public partial class HomePage : ContentPage
 {
@@ -24,10 +24,10 @@ public partial class HomePage : ContentPage
 
     private async void LoadRecentlyPlayed()
     {
-        // Hier später die zuletzt gehörten Songs/Alben laden
+        // Hier spï¿½ter die zuletzt gehï¿½rten Songs/Alben laden
     }
 
-    // Event Handler für Album/Playlist Klick
+    // Event Handler fï¿½r Album/Playlist Klick
     private async void OnAlbumTapped(object sender, EventArgs e)
     {
         var frame = sender as Border;
@@ -37,7 +37,7 @@ public partial class HomePage : ContentPage
         }
     }
 
-    // Event Handler für Mix Klick
+    // Event Handler fï¿½r Mix Klick
     private async void OnMixTapped(object sender, EventArgs e)
     {
         // Navigation zur Mix-Detail Seite

@@ -1,6 +1,7 @@
-using Audio_Hub.Droid.Services;
+using Audio_Hub.Droid.Services; 
+using Audio_Hub.Droid.Data.Models;
 
-namespace Audio_Hub;
+namespace Audio_Hub.Droid.Pages;
 
 public partial class LibraryPage : ContentPage
 {
@@ -34,7 +35,7 @@ public partial class LibraryPage : ContentPage
             var artists = await _libraryService.GetAllArtistsAsync();
             var songs = await _libraryService.GetAllSongsAsync();
 
-            // Hier später die Daten an die Views binden
+            // Hier spï¿½ter die Daten an die Views binden
         }
         catch (Exception ex)
         {
@@ -42,7 +43,7 @@ public partial class LibraryPage : ContentPage
         }
     }
 
-    // Event Handler für Filter-Chip Änderung
+    // Event Handler fï¿½r Filter-Chip ï¿½nderung
     private void OnFilterChanged(object sender, TappedEventArgs e)
     {
         if (e.Parameter is string filterName)
@@ -138,18 +139,18 @@ public partial class LibraryPage : ContentPage
         ContentScrollView.ScrollToAsync(0, 0, false);
     }
 
-    // Event Handler für Suchbutton
+    // Event Handler fï¿½r Suchbutton
     private async void OnSearchClicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Suche", "Suchfunktion wird geöffnet", "OK");
+        await DisplayAlert("Suche", "Suchfunktion wird geï¿½ffnet", "OK");
     }
 
-    // Event Handler für "Neue Playlist" Button
+    // Event Handler fï¿½r "Neue Playlist" Button
     private async void OnNewPlaylistClicked(object sender, TappedEventArgs e)
     {
         string playlistName = await DisplayPromptAsync(
             "Neue Playlist",
-            "Gib einen Namen für die Playlist ein:",
+            "Gib einen Namen fï¿½r die Playlist ein:",
             placeholder: "Meine Playlist");
 
         if (!string.IsNullOrEmpty(playlistName))
@@ -159,14 +160,14 @@ public partial class LibraryPage : ContentPage
         }
     }
 
-    // Event Handler für "Meine Favoriten" Button
+    // Event Handler fï¿½r "Meine Favoriten" Button
     private async void OnFavoritesClicked(object sender, TappedEventArgs e)
     {
         // TODO: Navigation zur Favoriten-Detailseite
         await DisplayAlert("Favoriten", "Deine Favoriten werden geladen...", "OK");
     }
 
-    // Event Handler für Item-Klick (Folder, Playlist, Artist, Album, Podcast)
+    // Event Handler fï¿½r Item-Klick (Folder, Playlist, Artist, Album, Podcast)
     private async void OnItemTapped(object sender, TappedEventArgs e)
     {
         var frame = sender as Frame;
@@ -176,7 +177,7 @@ public partial class LibraryPage : ContentPage
         }
     }
 
-    // Event Handler für More-Button (drei Punkte)
+    // Event Handler fï¿½r More-Button (drei Punkte)
     private async void OnMoreOptionsClicked(object sender, EventArgs e)
     {
         var button = sender as ImageButton;
@@ -187,10 +188,10 @@ public partial class LibraryPage : ContentPage
             "Abbrechen",
             null,
             "Abspielen",
-            "Als Nächstes abspielen",
-            "Zur Warteschlange hinzufügen",
-            "Zur Playlist hinzufügen",
-            "Zu Favoriten hinzufügen",
+            "Als Nï¿½chstes abspielen",
+            "Zur Warteschlange hinzufï¿½gen",
+            "Zur Playlist hinzufï¿½gen",
+            "Zu Favoriten hinzufï¿½gen",
             "Teilen",
             "Details anzeigen");
 
@@ -199,23 +200,23 @@ public partial class LibraryPage : ContentPage
             case "Abspielen":
                 // TODO: Sofort abspielen
                 break;
-            case "Als Nächstes abspielen":
-                // TODO: Zur Queue hinzufügen (nächster Song)
+            case "Als Nï¿½chstes abspielen":
+                // TODO: Zur Queue hinzufï¿½gen (nï¿½chster Song)
                 break;
-            case "Zur Warteschlange hinzufügen":
-                // TODO: Zur Queue hinzufügen (am Ende)
+            case "Zur Warteschlange hinzufï¿½gen":
+                // TODO: Zur Queue hinzufï¿½gen (am Ende)
                 break;
-            case "Zur Playlist hinzufügen":
+            case "Zur Playlist hinzufï¿½gen":
                 // TODO: Playlist-Auswahl Dialog
                 break;
-            case "Zu Favoriten hinzufügen":
-                // TODO: Zu Favoriten hinzufügen
+            case "Zu Favoriten hinzufï¿½gen":
+                // TODO: Zu Favoriten hinzufï¿½gen
                 break;
             case "Teilen":
-                // TODO: Share-Dialog öffnen
+                // TODO: Share-Dialog ï¿½ffnen
                 break;
             case "Details anzeigen":
-                // TODO: Detail-Seite öffnen
+                // TODO: Detail-Seite ï¿½ffnen
                 break;
         }
     }

@@ -1,4 +1,5 @@
-﻿namespace Audio_Hub;
+﻿using Audio_Hub.Droid.Pages;
+namespace Audio_Hub;
 
 public partial class MainPage : ContentPage
 {
