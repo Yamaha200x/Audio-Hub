@@ -8,6 +8,9 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseMaui>true</UseMaui>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<DocumentationFile>$(OutputPath)\AudioHub.xml</DocumentationFile>
+
 	</PropertyGroup>
 
 	<ItemGroup>
