@@ -31,6 +31,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <MauiXaml Update="DiscoverPage - Kopieren.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="DiscoverPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
@@ -38,6 +41,9 @@
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
       <MauiXaml Update="LibraryPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
+      <MauiXaml Update="SearchPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
     </ItemGroup>

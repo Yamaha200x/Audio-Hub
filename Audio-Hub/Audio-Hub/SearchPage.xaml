@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Audio_Hub.SearchPage"
+             BackgroundColor="#000000"
+             Title="Search">
+
+  <Grid RowDefinitions="Auto,Auto,*" Padding="0">
+
+    <!-- Header mit Titel -->
+    <Grid Grid.Row="0"
+          ColumnDefinitions="Auto,*"
+          Padding="20,15,20,10">
+
+      <Image Grid.Column="0"
+             Source="audiohub_icon_small.png"
+             WidthRequest="32"
+             HeightRequest="32"
+             VerticalOptions="Center"
+             Margin="0,0,10,0"/>
+
+      <Label Grid.Column="1"
+             Text="Suche"
+             FontSize="24"
+             FontAttributes="Bold"
+             TextColor="#00C2CB"
+             VerticalOptions="Center"/>
+    </Grid>
+
+    <!-- Suchfeld -->
+    <Frame Grid.Row="1"
+           Padding="15,12"
+           BackgroundColor="#1A1A1A"
+           BorderColor="#333333"
+           CornerRadius="25"
+           HasShadow="False"
+           Margin="20,0,20,15">
+      <Grid ColumnDefinitions="*,Auto">
+        <Entry Grid.Column="0"
+               x:Name="SearchEntry"
+               Placeholder="Browse Library"
+               PlaceholderColor="#999999"
+               TextColor="White"
+               BackgroundColor="Transparent"
+               FontSize="16"
+               TextChanged="OnSearchTextChanged"/>
+
+        <Image Grid.Column="1"
+               Source="search_icon.png"
+               WidthRequest="20"
+               HeightRequest="20"
+               VerticalOptions="Center"/>
+      </Grid>
+    </Frame>
+
+    <!-- Content -->
+    <ScrollView Grid.Row="2">
+      <VerticalStackLayout Padding="20,0,20,20" Spacing="15">
+
+        <!-- Recently Played Header -->
+        <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,10,0,10">
+          <Image Grid.Column="0"
+                 Source="sort_icon.png"
+                 WidthRequest="18"
+                 HeightRequest="18"
+                 VerticalOptions="Center"
+                 Margin="0,0,8,0"/>
+
+          <Label Grid.Column="1"
+                 Text="Recently played"
+                 FontSize="16"
+                 FontAttributes="Bold"
+                 TextColor="#00C2CB"
+                 VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- Recently Played Items -->
+
+        <!-- Artist - Conan Gray (rundes Bild) -->
+        <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+          <Frame.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnItemTapped"/>
+          </Frame.GestureRecognizers>
+          <Grid ColumnDefinitions="70,*" ColumnSpacing="15">
+            <Frame Grid.Column="0"
+                   Padding="0"
+                   CornerRadius="35"
+                   IsClippedToBounds="True"
+                   HasShadow="False"
+                   WidthRequest="70"
+                   HeightRequest="70">
+              <Image Source="artist_conan_gray.png" Aspect="AspectFill"/>
+            </Frame>
+            <Label Grid.Column="1"
+                   Text="Conan Gray"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   VerticalOptions="Center"/>
+          </Grid>
+        </Frame>
+
+        <!-- Album - DAWN FM -->
+        <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+          <Frame.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnItemTapped"/>
+          </Frame.GestureRecognizers>
+          <Grid ColumnDefinitions="70,*" ColumnSpacing="15">
+            <Frame Grid.Column="0"
+                   Padding="0"
+                   CornerRadius="8"
+                   IsClippedToBounds="True"
+                   HasShadow="False"
+                   WidthRequest="70"
+                   HeightRequest="70">
+              <Image Source="album_dawn_fm.png" Aspect="AspectFill"/>
+            </Frame>
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+              <Label Text="DAWN FM"
+                     FontSize="18"
+                     FontAttributes="Bold"
+                     TextColor="White"/>
+              <Label Text="The Weeknd"
+                     FontSize="14"
+                     TextColor="#999999"/>
+            </VerticalStackLayout>
+          </Grid>
+        </Frame>
+
+        <!-- Album - Water Fountain -->
+        <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+          <Frame.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnItemTapped"/>
+          </Frame.GestureRecognizers>
+          <Grid ColumnDefinitions="70,*" ColumnSpacing="15">
+            <Frame Grid.Column="0"
+                   Padding="0"
+                   CornerRadius="8"
+                   IsClippedToBounds="True"
+                   HasShadow="False"
+                   WidthRequest="70"
+                   HeightRequest="70">
+              <Image Source="album_water_fountain.png" Aspect="AspectFill"/>
+            </Frame>
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+              <Label Text="Water Fountain"
+                     FontSize="18"
+                     FontAttributes="Bold"
+                     TextColor="White"/>
+              <Label Text="alec benjamin"
+                     FontSize="14"
+                     TextColor="#999999"/>
+            </VerticalStackLayout>
+          </Grid>
+        </Frame>
+
+        <!-- Album - Wiped Out! -->
+        <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+          <Frame.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnItemTapped"/>
+          </Frame.GestureRecognizers>
+          <Grid ColumnDefinitions="70,*" ColumnSpacing="15">
+            <Frame Grid.Column="0"
+                   Padding="0"
+                   CornerRadius="8"
+                   IsClippedToBounds="True"
+                   HasShadow="False"
+                   WidthRequest="70"
+                   HeightRequest="70">
+              <Image Source="album_wiped_out.png" Aspect="AspectFill"/>
+            </Frame>
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+              <Label Text="Wiped Out!"
+                     FontSize="18"
+                     FontAttributes="Bold"
+                     TextColor="White"/>
+              <Label Text="The Neighbourhood"
+                     FontSize="14"
+                     TextColor="#999999"/>
+            </VerticalStackLayout>
+          </Grid>
+        </Frame>
+
+        <!-- Podcast - Baking a Mystery -->
+        <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+          <Frame.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnItemTapped"/>
+          </Frame.GestureRecognizers>
+          <Grid ColumnDefinitions="70,*" ColumnSpacing="15">
+            <Frame Grid.Column="0"
+                   Padding="0"
+                   CornerRadius="8"
+                   IsClippedToBounds="True"
+                   HasShadow="False"
+                   WidthRequest="70"
+                   HeightRequest="70">
+              <Image Source="podcast_baking_mystery.png" Aspect="AspectFill"/>
+            </Frame>
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+              <Label Text="Baking a Mystery"
+                     FontSize="18"
+                     FontAttributes="Bold"
+                     TextColor="White"/>
+              <Label Text="Updated Aug 21 • Stephanie Soo"
+                     FontSize="14"
+                     TextColor="#999999"/>
+            </VerticalStackLayout>
+          </Grid>
+        </Frame>
+
+        <!-- Artist - Keshi (rundes Bild) -->
+        <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+          <Frame.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnItemTapped"/>
+          </Frame.GestureRecognizers>
+          <Grid ColumnDefinitions="70,*" ColumnSpacing="15">
+            <Frame Grid.Column="0"
+                   Padding="0"
+                   CornerRadius="35"
+                   IsClippedToBounds="True"
+                   HasShadow="False"
+                   WidthRequest="70"
+                   HeightRequest="70">
+              <Image Source="artist_keshi.png" Aspect="AspectFill"/>
+            </Frame>
+            <Label Grid.Column="1"
+                   Text="Keshi"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   VerticalOptions="Center"/>
+          </Grid>
+        </Frame>
+
+        <!-- Abstand für Bottom Navigation -->
+        <BoxView HeightRequest="80" Color="Transparent"/>
+
+      </VerticalStackLayout>
+    </ScrollView>
+
+  </Grid>
+
+</ContentPage>
