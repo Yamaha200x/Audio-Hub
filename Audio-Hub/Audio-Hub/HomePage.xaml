@@ -2,43 +2,326 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Audio_Hub.HomePage"
-             BackgroundColor="#000000"
-             Shell.NavBarIsVisible="False">
+             BackgroundColor="#000000">
 
-    <Grid RowDefinitions="Auto, *">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,15" Spacing="25">
 
-        <HorizontalStackLayout Grid.Row="0" 
-                       HorizontalOptions="End" 
-                       Padding="15,10" 
-                       Spacing="15">
+            <!-- Header mit Icons -->
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto" Margin="0,10,0,0">
+                <Label Text="Home Page"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       VerticalOptions="Center"/>
 
-            <ImageButton Source="notifications_icon.png"
-                 HeightRequest="25"
-                 WidthRequest="25"
-                 MinimumHeightRequest="25"
-                 MaximumHeightRequest="25"
-                 Aspect="AspectFit"
-                 Padding="0"
-                 BackgroundColor="Transparent" />
+                <ImageButton Grid.Column="1"
+                            Source="filter_icon.png"
+                            WidthRequest="24"
+                            HeightRequest="24"
+                            Margin="0,0,15,0"
+                            BackgroundColor="Transparent"/>
 
-            <ImageButton Source="settings_icon.png"
-                 HeightRequest="25"
-                 WidthRequest="25"
-                 MinimumHeightRequest="25"
-                 MaximumHeightRequest="25"
-                 Aspect="AspectFit"
-                 Padding="0"
-                 BackgroundColor="Transparent" />
+                <ImageButton Source="notifications_icon.svg"
+                            HeightRequest="25"
+                            WidthRequest="25"
+                            MinimumHeightRequest="25"
+                            MaximumHeightRequest="25"
+                            Aspect="AspectFit"
+                            Padding="0"
+                            BackgroundColor="Transparent" />
 
-        </HorizontalStackLayout>
+                <ImageButton Source="settings_icon.svg"
+                            HeightRequest="25"
+                            WidthRequest="25"
+                            MinimumHeightRequest="25"
+                            MaximumHeightRequest="25"
+                            Aspect="AspectFit"
+                            Padding="0"
+                            BackgroundColor="Transparent" />
+            </Grid>
 
-        <VerticalStackLayout Grid.Row="1" VerticalOptions="Center">
-            <Label Text="Willkommen im Audio-Hub"
-                   TextColor="White"
-                   FontFamily="Century Gothic"
-                   FontSize="24"
-                   HorizontalOptions="Center" />
+            <!-- Fortsetzen Sektion -->
+            <VerticalStackLayout Spacing="15">
+                <Label Text="Fortsetzen"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+
+                <Grid RowDefinitions="Auto,Auto" 
+                      ColumnDefinitions="*,*,*" 
+                      RowSpacing="12" 
+                      ColumnSpacing="12">
+
+                    <!-- Zeile 1 -->
+                    <Frame Grid.Row="0" Grid.Column="0" 
+                           BackgroundColor="#1A1A1A" 
+                           Padding="8" 
+                           CornerRadius="8"
+                           HasShadow="False">
+                        <VerticalStackLayout Spacing="5">
+                            <Image Source="album_cover_1.png" 
+                                   Aspect="AspectFill"
+                                   HeightRequest="70"
+                                   WidthRequest="70"/>
+                            <Label Text="Coffee &amp; Jazz" 
+                                   FontSize="12" 
+                                   TextColor="White"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="1"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Row="0" Grid.Column="1" 
+                           BackgroundColor="#1A1A1A" 
+                           Padding="8" 
+                           CornerRadius="8"
+                           HasShadow="False">
+                        <VerticalStackLayout Spacing="5">
+                            <Image Source="album_cover_2.png" 
+                                   Aspect="AspectFill"
+                                   HeightRequest="70"
+                                   WidthRequest="70"/>
+                            <Label Text="Summer Vibes" 
+                                   FontSize="12" 
+                                   TextColor="White"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="1"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Row="0" Grid.Column="2" 
+                           BackgroundColor="#1A1A1A" 
+                           Padding="8" 
+                           CornerRadius="8"
+                           HasShadow="False">
+                        <VerticalStackLayout Spacing="5">
+                            <Image Source="album_cover_3.png" 
+                                   Aspect="AspectFill"
+                                   HeightRequest="70"
+                                   WidthRequest="70"/>
+                            <Label Text="RELAXED" 
+                                   FontSize="12" 
+                                   TextColor="White"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="1"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Zeile 2 -->
+                    <Frame Grid.Row="1" Grid.Column="0" 
+                           BackgroundColor="#1A1A1A" 
+                           Padding="8" 
+                           CornerRadius="8"
+                           HasShadow="False">
+                        <VerticalStackLayout Spacing="5">
+                            <Image Source="album_cover_4.png" 
+                                   Aspect="AspectFill"
+                                   HeightRequest="70"
+                                   WidthRequest="70"/>
+                            <Label Text="Anything Goes" 
+                                   FontSize="12" 
+                                   TextColor="White"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="1"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Row="1" Grid.Column="1" 
+                           BackgroundColor="#1A1A1A" 
+                           Padding="8" 
+                           CornerRadius="8"
+                           HasShadow="False">
+                        <VerticalStackLayout Spacing="5">
+                            <Image Source="album_cover_5.png" 
+                                   Aspect="AspectFill"
+                                   HeightRequest="70"
+                                   WidthRequest="70"/>
+                            <Label Text="Ariana GD's" 
+                                   FontSize="12" 
+                                   TextColor="White"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="1"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Row="1" Grid.Column="2" 
+                           BackgroundColor="#1A1A1A" 
+                           Padding="8" 
+                           CornerRadius="8"
+                           HasShadow="False">
+                        <VerticalStackLayout Spacing="5">
+                            <Image Source="album_cover_6.png" 
+                                   Aspect="AspectFill"
+                                   HeightRequest="70"
+                                   WidthRequest="70"/>
+                            <Label Text="Lo-Fi Beats" 
+                                   FontSize="12" 
+                                   TextColor="White"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="1"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                </Grid>
+            </VerticalStackLayout>
+
+            <!-- Deine Top Mixes -->
+            <VerticalStackLayout Spacing="15">
+                <Label Text="Deine Top Mixes"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+
+                <ScrollView Orientation="Horizontal" 
+                           HorizontalScrollBarVisibility="Never">
+                    <HorizontalStackLayout Spacing="12">
+
+                        <!-- Mix 1 -->
+                        <Frame BackgroundColor="#1A1A1A" 
+                               Padding="0" 
+                               CornerRadius="8"
+                               HasShadow="False"
+                               WidthRequest="140">
+                            <VerticalStackLayout Spacing="0">
+                                <Image Source="mix_cover_1.png" 
+                                       Aspect="AspectFill"
+                                       HeightRequest="140"
+                                       WidthRequest="140"/>
+                                <Label Text="Chill Mix" 
+                                       FontSize="14" 
+                                       TextColor="White"
+                                       Padding="8"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="1"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Mix 2 -->
+                        <Frame BackgroundColor="#1A1A1A" 
+                               Padding="0" 
+                               CornerRadius="8"
+                               HasShadow="False"
+                               WidthRequest="140">
+                            <VerticalStackLayout Spacing="0">
+                                <Image Source="mix_cover_2.png" 
+                                       Aspect="AspectFill"
+                                       HeightRequest="140"
+                                       WidthRequest="140"/>
+                                <Label Text="Workout Mix" 
+                                       FontSize="14" 
+                                       TextColor="White"
+                                       Padding="8"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="1"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Mix 3 -->
+                        <Frame BackgroundColor="#1A1A1A" 
+                               Padding="0" 
+                               CornerRadius="8"
+                               HasShadow="False"
+                               WidthRequest="140">
+                            <VerticalStackLayout Spacing="0">
+                                <Image Source="mix_cover_3.png" 
+                                       Aspect="AspectFill"
+                                       HeightRequest="140"
+                                       WidthRequest="140"/>
+                                <Label Text="Party Mix" 
+                                       FontSize="14" 
+                                       TextColor="White"
+                                       Padding="8"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="1"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Mix 4 - Weitere können hinzugefügt werden -->
+                        <Frame BackgroundColor="#1A1A1A" 
+                               Padding="0" 
+                               CornerRadius="8"
+                               HasShadow="False"
+                               WidthRequest="140">
+                            <VerticalStackLayout Spacing="0">
+                                <Image Source="mix_cover_4.png" 
+                                       Aspect="AspectFill"
+                                       HeightRequest="140"
+                                       WidthRequest="140"/>
+                                <Label Text="Study Mix" 
+                                       FontSize="14" 
+                                       TextColor="White"
+                                       Padding="8"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="1"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                    </HorizontalStackLayout>
+                </ScrollView>
+            </VerticalStackLayout>
+
+            <!-- Basiert auf deinen letzten Songs -->
+            <VerticalStackLayout Spacing="15">
+                <Label Text="Basiert auf deinen letzten Songs"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+
+                <ScrollView Orientation="Horizontal" 
+                           HorizontalScrollBarVisibility="Never">
+                    <HorizontalStackLayout Spacing="12">
+
+                        <!-- Empfehlung 1 -->
+                        <Frame BackgroundColor="#1A1A1A" 
+                               Padding="0" 
+                               CornerRadius="8"
+                               HasShadow="False"
+                               WidthRequest="180">
+                            <VerticalStackLayout Spacing="0">
+                                <Image Source="recommendation_1.png" 
+                                       Aspect="AspectFill"
+                                       HeightRequest="180"
+                                       WidthRequest="180"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Empfehlung 2 -->
+                        <Frame BackgroundColor="#1A1A1A" 
+                               Padding="0" 
+                               CornerRadius="8"
+                               HasShadow="False"
+                               WidthRequest="180">
+                            <VerticalStackLayout Spacing="0">
+                                <Image Source="recommendation_2.png" 
+                                       Aspect="AspectFill"
+                                       HeightRequest="180"
+                                       WidthRequest="180"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Weitere Empfehlungen können hinzugefügt werden -->
+                        <Frame BackgroundColor="#1A1A1A" 
+                               Padding="0" 
+                               CornerRadius="8"
+                               HasShadow="False"
+                               WidthRequest="180">
+                            <VerticalStackLayout Spacing="0">
+                                <Image Source="recommendation_3.png" 
+                                       Aspect="AspectFill"
+                                       HeightRequest="180"
+                                       WidthRequest="180"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                    </HorizontalStackLayout>
+                </ScrollView>
+            </VerticalStackLayout>
+
+            <!-- Abstand für Bottom Navigation -->
+            <BoxView HeightRequest="80" Color="Transparent"/>
+
         </VerticalStackLayout>
+    </ScrollView>
 
-    </Grid>
 </ContentPage>

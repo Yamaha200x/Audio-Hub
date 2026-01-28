@@ -1,11 +1,581 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Audio_Hub.LibraryPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="Audio_Hub.LibraryPage"
+             BackgroundColor="#000000">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="0">
+
+        <!-- Header mit Titel und Suchicon -->
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="Auto,*,Auto" 
+              Padding="20,15,20,10">
+
+            <Image Grid.Column="0"
+                   Source="audiohub_icon_small.png"
+                   WidthRequest="32"
+                   HeightRequest="32"
+                   VerticalOptions="Center"
+                   Margin="0,0,10,0"/>
+
+            <Label Grid.Column="1"
+                   Text="Deine Bibliothek"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#00C2CB"
+                   VerticalOptions="Center"/>
+
+            <ImageButton Grid.Column="2"
+                        Source="search_icon.png"
+                        WidthRequest="28"
+                        HeightRequest="28"
+                        BackgroundColor="Transparent"
+                        VerticalOptions="Center"
+                        Clicked="OnSearchClicked"/>
+        </Grid>
+
+        <!-- Filter Chips -->
+        <ScrollView Grid.Row="1" 
+                   Orientation="Horizontal" 
+                   HorizontalScrollBarVisibility="Never"
+                   Padding="20,0,20,15">
+            <HorizontalStackLayout Spacing="10">
+
+                <Frame x:Name="FoldersChip"
+                       Padding="12,8"
+                       BackgroundColor="#1E5D60"
+                       BorderColor="#00C2CB"
+                       CornerRadius="20"
+                       HasShadow="False">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFilterChanged" CommandParameter="Folders"/>
+                    </Frame.GestureRecognizers>
+                    <Label Text="Folders"
+                           TextColor="White"
+                           FontSize="14"/>
+                </Frame>
+
+                <Frame x:Name="PlaylistsChip"
+                       Padding="12,8"
+                       BackgroundColor="#1A1A1A"
+                       BorderColor="Transparent"
+                       CornerRadius="20"
+                       HasShadow="False">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFilterChanged" CommandParameter="Playlists"/>
+                    </Frame.GestureRecognizers>
+                    <Label Text="Playlists"
+                           TextColor="White"
+                           FontSize="14"/>
+                </Frame>
+
+                <Frame x:Name="ArtistsChip"
+                       Padding="12,8"
+                       BackgroundColor="#1A1A1A"
+                       BorderColor="Transparent"
+                       CornerRadius="20"
+                       HasShadow="False">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFilterChanged" CommandParameter="Artists"/>
+                    </Frame.GestureRecognizers>
+                    <Label Text="Artists"
+                           TextColor="White"
+                           FontSize="14"/>
+                </Frame>
+
+                <Frame x:Name="AlbumsChip"
+                       Padding="12,8"
+                       BackgroundColor="#1A1A1A"
+                       BorderColor="Transparent"
+                       CornerRadius="20"
+                       HasShadow="False">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFilterChanged" CommandParameter="Albums"/>
+                    </Frame.GestureRecognizers>
+                    <Label Text="Albums"
+                           TextColor="White"
+                           FontSize="14"/>
+                </Frame>
+
+                <Frame x:Name="PodcastsChip"
+                       Padding="12,8"
+                       BackgroundColor="#1A1A1A"
+                       BorderColor="Transparent"
+                       CornerRadius="20"
+                       HasShadow="False">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFilterChanged" CommandParameter="Podcasts"/>
+                    </Frame.GestureRecognizers>
+                    <Label Text="Podcasts"
+                           TextColor="White"
+                           FontSize="14"/>
+                </Frame>
+
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <!-- Content Area - Ändert sich je nach Filter -->
+        <ScrollView Grid.Row="2" x:Name="ContentScrollView">
+            <VerticalStackLayout x:Name="ContentArea" Padding="20,0,20,20" Spacing="15">
+
+                <!-- FOLDERS VIEW (Default) -->
+                <VerticalStackLayout x:Name="FoldersView" IsVisible="True" Spacing="15">
+
+                    <!-- Neue Playlist -->
+                    <Frame Padding="15" BackgroundColor="#1A1A1A" CornerRadius="8" HasShadow="False">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnNewPlaylistClicked"/>
+                        </Frame.GestureRecognizers>
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Frame Grid.Column="0" WidthRequest="40" HeightRequest="40" Padding="0"
+                                   BackgroundColor="#00C2CB" CornerRadius="20" HasShadow="False">
+                                <Label Text="+" FontSize="28" TextColor="Black" 
+                                       HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Frame>
+                            <Label Grid.Column="1" Text="Neue Playlist" FontSize="16" 
+                                   FontAttributes="Bold" TextColor="White" 
+                                   VerticalOptions="Center" Margin="15,0,0,0"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Meine Favoriten -->
+                    <Frame Padding="15" BackgroundColor="#1A1A1A" CornerRadius="8" HasShadow="False">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnFavoritesClicked"/>
+                        </Frame.GestureRecognizers>
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Frame Grid.Column="0" WidthRequest="40" HeightRequest="40" Padding="0"
+                                   BackgroundColor="#00C2CB" CornerRadius="20" HasShadow="False">
+                                <Label Text="♡" FontSize="22" TextColor="Black" 
+                                       HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Frame>
+                            <Label Grid.Column="1" Text="Meine Favoriten" FontSize="16" 
+                                   FontAttributes="Bold" TextColor="White" 
+                                   VerticalOptions="Center" Margin="15,0,0,0"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Zuletzt Hinzugefügt Section -->
+                    <Label Text="↓ Zuletzt Hinzugefügt" FontSize="14" TextColor="#00C2CB" 
+                           Margin="0,10,0,5"/>
+
+                    <!-- Folder Items -->
+                    <Frame Padding="15" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Image Grid.Column="0" Source="folder_moods.png" 
+                                   WidthRequest="60" HeightRequest="60"/>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="moods" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="5 Playlists" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="15" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Image Grid.Column="0" Source="folder_blends.png" 
+                                   WidthRequest="60" HeightRequest="60"/>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="blends" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="3 Playlists" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="15" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Image Grid.Column="0" Source="folder_jazz.png" 
+                                   WidthRequest="60" HeightRequest="60"/>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="jazz" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="12 Playlists" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="15" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Image Grid.Column="0" Source="folder_random.png" 
+                                   WidthRequest="60" HeightRequest="60"/>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="random>" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="8 Playlists" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- PLAYLISTS VIEW -->
+                <VerticalStackLayout x:Name="PlaylistsView" IsVisible="False" Spacing="15">
+
+                    <!-- Your Liked Playlists Header -->
+                    <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,5">
+                        <Frame Grid.Column="0" WidthRequest="40" HeightRequest="40" Padding="0"
+                               BackgroundColor="#00C2CB" CornerRadius="20" HasShadow="False" Margin="0,0,10,0">
+                            <Label Text="♡" FontSize="22" TextColor="Black" 
+                                   HorizontalOptions="Center" VerticalOptions="Center"/>
+                        </Frame>
+                        <Label Grid.Column="1" Text="Your Liked Playlists" FontSize="18" 
+                               FontAttributes="Bold" TextColor="White" VerticalOptions="Center"/>
+                    </Grid>
+
+                    <Label Text="↓ Zuletzt Hinzugefügt" FontSize="14" TextColor="#00C2CB" Margin="0,5,0,5"/>
+
+                    <!-- Playlist Items -->
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="playlist_supernache.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="Supernache" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Conan Gray" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="playlist_dawn_fm.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="DAWN FM" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="The Weeknd" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="playlist_planet_her.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="Planet Her" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Doja Cat" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="album_wiped_out.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="Wiped Out!" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="The Neighbourhood" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="playlist_bloom.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="Bloom" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Machine Gun Kelly" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- ARTISTS VIEW -->
+                <VerticalStackLayout x:Name="ArtistsView" IsVisible="False" Spacing="15">
+
+                    <!-- Sort Controls -->
+                    <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,10">
+                        <Label Grid.Column="0" Text="Sort By" FontSize="14" 
+                               TextColor="White" VerticalOptions="Center"/>
+                        <Label Grid.Column="2" Text="Recently played ↓" FontSize="14" 
+                               TextColor="#00C2CB" VerticalOptions="Center"/>
+                    </Grid>
+
+                    <!-- Artist Items (mit rundem Bild) -->
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="70,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="35" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="70" HeightRequest="70">
+                                <Image Source="artist_conan_gray.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <Label Grid.Column="1" Text="Conan Gray" FontSize="18" 
+                                   FontAttributes="Bold" TextColor="White" VerticalOptions="Center"/>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="70,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="35" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="70" HeightRequest="70">
+                                <Image Source="artist_chase_atlantic.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <Label Grid.Column="1" Text="Chase Atlantic" FontSize="18" 
+                                   FontAttributes="Bold" TextColor="White" VerticalOptions="Center"/>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="70,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="35" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="70" HeightRequest="70">
+                                <Image Source="artist_beabadoobee.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <Label Grid.Column="1" Text="beabadoobee" FontSize="18" 
+                                   FontAttributes="Bold" TextColor="White" VerticalOptions="Center"/>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="70,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="35" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="70" HeightRequest="70">
+                                <Image Source="artist_new_jeans.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <Label Grid.Column="1" Text="New Jeans" FontSize="18" 
+                                   FontAttributes="Bold" TextColor="White" VerticalOptions="Center"/>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="70,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="35" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="70" HeightRequest="70">
+                                <Image Source="artist_keshi.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <Label Grid.Column="1" Text="Keshi" FontSize="18" 
+                                   FontAttributes="Bold" TextColor="White" VerticalOptions="Center"/>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- ALBUMS VIEW -->
+                <VerticalStackLayout x:Name="AlbumsView" IsVisible="False" Spacing="15">
+
+                    <!-- Your Liked Albums Header -->
+                    <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,5">
+                        <Frame Grid.Column="0" WidthRequest="40" HeightRequest="40" Padding="0"
+                               BackgroundColor="#00C2CB" CornerRadius="20" HasShadow="False" Margin="0,0,10,0">
+                            <Label Text="♡" FontSize="22" TextColor="Black" 
+                                   HorizontalOptions="Center" VerticalOptions="Center"/>
+                        </Frame>
+                        <Label Grid.Column="1" Text="Your Liked Albums" FontSize="18" 
+                               FontAttributes="Bold" TextColor="White" VerticalOptions="Center"/>
+                    </Grid>
+
+                    <Label Text="↓ Recently added" FontSize="14" TextColor="#00C2CB" Margin="0,5,0,5"/>
+
+                    <!-- Album Items -->
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="album_supernache.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="Supernache" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Conan Gray" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="album_dawn_fm.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="DAWN FM" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="The Weeknd" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="album_planet_her.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="Planet Her" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Doja Cat" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="album_wiped_out.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="Wiped Out!" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="The Neighbourhood" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="album_bloom.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="Bloom" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Machine Gun Kelly" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- PODCASTS VIEW -->
+                <VerticalStackLayout x:Name="PodcastsView" IsVisible="False" Spacing="15">
+
+                    <!-- Your Liked Podcasts Header -->
+                    <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,5">
+                        <Frame Grid.Column="0" WidthRequest="40" HeightRequest="40" Padding="0"
+                               BackgroundColor="#00C2CB" CornerRadius="20" HasShadow="False" Margin="0,0,10,0">
+                            <Label Text="♡" FontSize="22" TextColor="Black" 
+                                   HorizontalOptions="Center" VerticalOptions="Center"/>
+                        </Frame>
+                        <Label Grid.Column="1" Text="Your Liked Podcasts" FontSize="18" 
+                               FontAttributes="Bold" TextColor="White" VerticalOptions="Center"/>
+                    </Grid>
+
+                    <Label Text="↓ A - Z" FontSize="14" TextColor="#00C2CB" Margin="0,5,0,5"/>
+
+                    <!-- Podcast/Audiobook Items -->
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="podcast_anything_goes.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="Anything Goes" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Emmar Ch • Emma Chamberlain" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="podcast_ask_me_another.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="Ask Me Another" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Ophira E • NPR Studio" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="podcast_baking_mystery.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="Baking a Mystery" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Baking Pr • Unlimited Kat" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="podcast_extra_dynamic.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="Extra Dynamic" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Extrac Ba • 10 or mom ontley" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10" BackgroundColor="Transparent" HasShadow="False">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="15">
+                            <Frame Grid.Column="0" Padding="0" CornerRadius="8" IsClippedToBounds="True" 
+                                   HasShadow="False" WidthRequest="60" HeightRequest="60">
+                                <Image Source="podcast_laughter_therapy.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label Text="Laughter Therapy" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Laugther • Gru Kriesher" FontSize="13" TextColor="#999999"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="2" Source="more_icon.png" 
+                                        WidthRequest="24" HeightRequest="24" BackgroundColor="Transparent"/>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- Abstand für Bottom Navigation -->
+                <BoxView HeightRequest="80" Color="Transparent"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
 </ContentPage>
